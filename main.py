@@ -26,9 +26,9 @@ def repl_serv (environ, start_response):
         msg = environ['wsgi.input'].read (length)
         #return ''.join(random.sample(msg, len(msg)))
         r = str (len (msg))
-        if 'fuck' in msg:
+        if 'foo' in msg:
             return """
-            <font color="red">FUCK</font>
+            <font color="red">FOO</font>
             """.strip()
         return r
     with open (front, 'r') as f:
