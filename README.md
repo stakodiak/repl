@@ -8,7 +8,7 @@ Start daemon:
 ```
 python main.py 
 ```
-Access repl at [http://localhost:8080]().
+Access repl at [http://localhost:8080](http://localhost:8080).
 
 
 ![alt](https://rawgithub.com/stakodiak/repl/master/example.png)
