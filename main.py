@@ -26,6 +26,10 @@ def repl_serv (environ, start_response):
         msg = environ['wsgi.input'].read (length)
         #return ''.join(random.sample(msg, len(msg)))
         r = str (len (msg))
+        if 'img' in msg:
+            return """
+            <img src="http://weaselzippers.us/wp-content/uploads/alg-fast-sarah-palin-jpg.jpg">
+            """.strip()
         if 'foo' in msg:
             return """
             <font color="red">FOO</font>
