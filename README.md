@@ -4,9 +4,9 @@ Clone repo:
 git clone https://github.com/stakodiak/repl.git
 cd repl
 ```
-Start daemon:
+Start python daemon:
 ```
-python main.py 
+python main.py --python
 ```
 Access repl at [http://localhost:8080](http://localhost:8080).
 
