@@ -1,13 +1,16 @@
 # main.py - Serves REPL from localhost.
 from wsgiref.simple_server import make_server
 import random
+from code import InteractiveInterpreter as II
+import os
+import sys
+import StringIO
 
 # Config.
 PORT = 8080
 front = 'index.html'
 style = 'style.css'
-
-
+interp = II ()
 def main ():
     print "Serving {} on localhost:{}...".format (front, PORT)
     serve()
@@ -24,17 +27,17 @@ def repl_serv (environ, start_response):
     if request == "POST":
         length = int(environ['CONTENT_LENGTH'])
         msg = environ['wsgi.input'].read (length)
-        #return ''.join(random.sample(msg, len(msg)))
-        r = str (len (msg))
-        if 'img' in msg:
-            return """
-            <img src="http://weaselzippers.us/wp-content/uploads/alg-fast-sarah-palin-jpg.jpg">
-            """.strip()
-        if 'foo' in msg:
-            return """
-            <font color="red">FOO</font>
-            """.strip()
-        return r
+        if "--python" in sys.argv:
+            # Parse Python
+            s = sys.stdout
+            output = StringIO.StringIO ()
+            sys.stdout = output
+            interp.runsource (msg)
+            sys.stdout = s
+            out = output.getvalue().replace ('\n', '<br>')
+            return out
+        return os.popen (msg).read().replace ('\n', '<br>')
+
     with open (front, 'r') as f:
         html = f.read()
         return html
