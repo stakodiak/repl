@@ -1,35 +1,37 @@
 /* Eric Meyer's Reset CSS v2.0 - http://cssreset.com */
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
-#ornament {
-    padding: 0;
-    margin: 0;
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,textarea,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}table{border-collapse:collapse;border-spacing:0}
+/** { border: 1px red solid !important; }*/
+#prompt {
+    float: left;
+}
+.r {
+    border-top: 1px solid #BB133E;
+}
+.b {
+    border-top: 1px solid #002664;
 }
 #editor {
-    margin-top: 5%;
-    line-height: 125%;
     width: 100%;
-    font-size: 20px;
-    font-family: "Courier";
-    max-height: 80%;
+    font-size: 16px;
+    white-space: pre;
+    max-height: 79%;
     overflow: scroll;
 }
 #ed {
-    float: right;
-    width: 96%;
-    font-family: "Courier New";
-    font-size: 20px;
-    padding: 0;
-    margin: 0;
-    max-height: 22px;
-    line-height: 120%;
+    float: left;
+    display: inline;
+    margin-top: 0px;
+    width: 80%;
+    line-height: 16px;
 }
-#TF {
+#tf {
     float: left;
     width: 60%;
+    font-family: 'Courier New', 'Droid Sans Mono';
     margin-left: 5%;
+    line-height: 120%;
 }
 .left{
-    border-right: solid; 
     border-width: 1px; 
     width: 15%;
     float: left;
@@ -37,15 +39,15 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
     padding: 1%;
 }
 #intro {
-    font-family: "Courier New";
+    font-family: "courier new";
     }
 #brand {
     font-size: 24px;
     text-align: center;
 }
 body {
-    font-family: "Courier New", monospace;
-    font-size: 20px;
+    font-family: "courier new", monospace;
+    font-size: 16px;
     font-style: bold;
     overflow: hidden;
 }
@@ -53,6 +55,8 @@ textarea:focus {
     outline: none;
 }
 textarea {
-    border: 0;
     resize: none;
-}
+    font-family: inherit;
+    border: 0;
+    font-size: inherit; 
+    }
