@@ -1,87 +1,76 @@
 <html>
-	<head>
-		<title>repl</title>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
-        <script src="//rawgithub.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js" ></script>
-        <link rel="stylesheet" href="style.css">
-		<script type="text/javascript">
-			var a = "hello";
-			var text = "";
-			var mode = "insert";
-			var changeMode = " "; 
-			var count = 1;
-			function countNew (val) {
-				var t = $('#editor').val();
-				var lines = t.split (/\r|\r\n|\n/);
-				count = lines.length;
-			}
-			function countWords () {
-				var t = $('#editor').val();
-				words = t.split(/ /);
-				num_words = words.length;
-				if (t.length < 1)
-					num_words = 0;
-				return num_words;
-			}
-			function init () {
-				document.forms['textForm'].elements['ed'].focus();
-				mode = "insert";
-				$('#ed').val ("");
-			}
-		</script>
-				
-	</head>
-	<body id="b" onload="init();">
-       
-        <div class="left">
-        <hr>
-        <div id="brand">
-            repl
-        </div>
-        <hr>
-        </div>
-        <div id="TF">
-            <form name="textForm">
-                <div id="editor" readonly onkeyup="countNew(this)">
-                    <span id="intro">repl 8.16.13</span>
-                </div>
-                <span id="ornament">>></span><textarea minheight="1" id="ed" maxlength="80" autocomplete="off"> </textarea>
-                <div id="field"><span style="float: right;">0 words</span></div>
-            </form>
-        </div>
+<head>
+    <title>repl</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+    <script src="//rawgithub.com/flesler/jquery.scrollTo/master/jquery.scrollTo.min.js" ></script>
+    <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript">
+        function init () {
+            document.forms['textForm'].elements['ed'].focus();
+            mode = "insert";
+            $('#ed').val ("");
+        }
+    </script>
+            
+</head>
+<body id="b" onload="init();">
+   
+    <div class="left">
+    <br>
+    <div id="brand">
+        repl
+    </div>
+    <hr class="b">
+    </div>
+    <div id="TF">
+        <form name="textForm">
+            <span id="intro">repl 8.16.13</span>
+            <br>
+            <br>
+            <div id="editor" readonly onkeyup="countNew(this)"></div>
+            <span id="prompt">>>&nbsp;</span><textarea minheight="1" id="ed" maxlength="80" autocomplete="off"> </textarea>
+        </form>
+    </div>
 
-		<script>
-			$('body').on('keydown', function (e) {
-				var key = e.which;
-				changeMode = "";
-                switch (key) { 
-                    case 13:
-                        e.preventDefault();
-                        var s = $('#ed').val();
-                        var editor_value = $('#editor').html();
-                        $('#editor').html (editor_value + '<br>>> ' + s + '<br>');
-                        $.ajax ({
-                            type: "POST", 
-                            url: "",
-                            data: $('#ed').val(), 
-                            success: function (data) {
-                                $('#editor').html ($('#editor').html() + data );
+    <script>
+        $('body').on('keydown', function (e) {
+            var key = e.which;
+            changeMode = "";
+            switch (key) { 
+                case 13:
+                    e.preventDefault();
+                    var s = $('#ed').val();
+                    $('#ed').val("");
+                    $('#prompt').val("");
+                    $('#editor').html (
+                        $('#editor').html() 
+                        + '>> '
+                        + s
+                        + '<br>'
+                        );
+                    $.ajax ({
+                        type: "POST", 
+                        url: "",
+                        data: s,
+                        success: function (data) {
+                            add = ''
+                            if (data.length > 0) {
+                                add = data
                             }
-                        });
-                        $('#ed').val("");
-                        $('#editor').scrollTo( '110%' );
-                        break;
-                }
-				num_words = countWords ();
-				$('#field').html (text + "<span style=\"float: right;\">" + num_words + "  words     </span><br>");
-			});
-			$('#editor').on('keyup', function(e) {
-				num_words = countWords ();
-				$('#field').html (text + "<span style=\"float: right;\">" + num_words + "  words     </span><br>");
-			});
-				
-
-
-		</script>
-	</body>
+                            $('#editor').html (
+                                $('#editor').html() 
+                                + add 
+                                );
+                            $('#prompt').val(">>&nbsp;");
+                        }
+                    });
+                    break;
+            }
+        });
+        $('body').on('keyup', function (e) {
+            $('#editor').scrollTo( '100%' );
+        });
+    </script>
+</body>
 </html>
